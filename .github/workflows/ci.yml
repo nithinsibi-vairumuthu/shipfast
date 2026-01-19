@@ -24,7 +24,12 @@ jobs:
               yaml.safe_load(f)
           print("compose.yaml is valid YAML")
           EOF
-          
+
+            - name: Validate Docker Compose configuration
+        run: |
+          docker compose -f compose.yaml config
+
+
       - name: Build Docker image
         run: |
           IMAGE_TAG=${GITHUB_SHA}

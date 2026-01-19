@@ -1,0 +1,22 @@
+name: ShipFast CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify Docker Compose file exists
+        run: |
+          if [ ! -f compose.yaml ]; then
+            echo "compose.yaml not found!"
+            exit 1
+          fi
+          echo "compose.yaml found"

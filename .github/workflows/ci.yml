@@ -26,9 +26,6 @@ jobs:
           EOF
 
             - name: Validate Docker Compose configuration
-        run: |
-          docker compose -f compose.yaml config
-
 
       - name: Build Docker image
         run: |

@@ -13,9 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
-
       - name: Validate docker-compose YAML
         run: |
           python3 - <<'EOF'
@@ -25,7 +22,12 @@ jobs:
           print("compose.yaml is valid YAML")
           EOF
 
-            - name: Validate Docker Compose configuration
+      - name: Validate Docker Compose configuration
+        run: |
+          docker compose -f compose.yaml config
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
 
       - name: Build Docker image
         run: |
